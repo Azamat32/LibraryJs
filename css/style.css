@@ -22,16 +22,17 @@ body{
 .logo h1{
     color: #2CD3E1;
 }
-.Add-book, .submit{
+.Add-book, .btn_delete, .submit{
     background: linear-gradient(180deg, #3980FD 0%, #3980FD 0.01%, #6692DB 100%);
     border-radius: 16px;
     border: 1px solid #3980FD;
     padding: 10px 16px;
     cursor: pointer;
     color: #fff;
+    width: 100%;
     transition: 0.3s;
 }
-.Add-book:hover , .submit:hover{
+.Add-book:hover , .btn_delete:hover ,  .submit:hover{
     color: #3980FD;
     background: #fff;
 }
@@ -66,6 +67,18 @@ input{
     border: 1px solid #CDD0DE;
     border-radius: 16px;
     padding: 16px;
+}
+.isRead{
+    border: 1px solid #CDD0DE;
+    border-radius: 16px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: red;
+    color:#fff;
+    cursor: pointer;
+}
+.isRead.active{
+    background: green;
 }
 .library_inner{
     display: flex;

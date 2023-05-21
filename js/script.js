@@ -23,7 +23,7 @@ function outsideClick(event) {
   }
 }
 let books = [];
-function Book(authorValue, pagesValue, titleValue) {
+function Book(authorValue, pagesValue, titleValue, isRead) {
   this.author = authorValue;
   this.pages = pagesValue;
   this.title = titleValue;
@@ -35,13 +35,16 @@ function saveBook(e) {
   let pagesValue = pages.value;
   let titleValue = title.value;
 
-  let newBook = new Book(authorValue, pagesValue, titleValue);
-  books.push(newBook);
-  modal.classList.remove("active");
-
   console.log(books);
-  console.log(books);
-  displayBooks();
+  if (author.value <= 0 || title.value <= 0 || pages.value <= 0) {
+    alert("please enter a title or a page");
+    return;
+  } else {
+    let newBook = new Book(authorValue, pagesValue, titleValue);
+    books.push(newBook);
+    modal.classList.remove("active");
+    displayBooks();
+  }
   // Perform any additional actions with the saved book values here
 }
 
@@ -66,13 +69,37 @@ function displayBooks() {
     let pagesCard = document.createElement("h1");
     pagesCard.className = "book_pages";
     pagesCard.textContent = "Pages: " + element.pages;
+    let isReadCArd = document.createElement("div");
+    isReadCArd.className = "isRead";
+    isReadCArd.textContent = "Readed";
+
+    isReadCArd.addEventListener("click", isReaded);
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("btn_delete");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      deleteBook(i);
+    });
 
     libraryItem.appendChild(titleCard);
     libraryItem.appendChild(authorCard);
     libraryItem.appendChild(pagesCard);
+    libraryItem.appendChild(isReadCArd);
+
+    libraryItem.appendChild(deleteButton);
 
     libraryContainer.appendChild(libraryItem);
   }
 }
 
 console.log();
+
+function isReaded(event) {
+  event.target.classList.toggle("active");
+}
+
+function deleteBook(index) {
+  books.splice(index, 1);
+  displayBooks();
+}
